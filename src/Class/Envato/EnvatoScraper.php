@@ -163,7 +163,7 @@
 
       $request = $envato->request( 'v3/market/catalog/item', 'GET', array( 'id' => $id ) );
 
-      if( $save AND !$request->error AND function_exists( 'store_meta' ) )
+      if( $save AND function_exists( 'store_meta' ) )
         store_meta( $id, $request );
 
       return $request;
