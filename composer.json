@@ -1,0 +1,23 @@
+{
+    "name": "smafe/envato-scraper",
+    "type": "library",
+    "description": "PHP library to scrape data from the Envato website..",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Smafe Web Solutions",
+            "email": "h@smafe.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.0.0",
+        "sunra/php-simple-html-dom-parser": "1.5.1",
+        "smafe/envato-api": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/Class/Envato/EnvatoScraper.php"
+        ]
+    }
+}
