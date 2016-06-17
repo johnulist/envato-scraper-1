@@ -75,7 +75,7 @@
   try {
 
     $comments_start = microtime( true );
-    $comments = $scraper->fetch_comments( $id );
+    //$comments = $scraper->fetch_comments( $id );
     $comments_total = microtime( true ) - $comments_start;
 
   } catch( \ErrorException $e ) {
