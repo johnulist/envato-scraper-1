@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.0.0",
         "sunra/php-simple-html-dom-parser": "1.5.1",
-        "smafe/envato-api": "*"
+        "smafe/envato-api": "0.0.4"
     },
     "autoload": {
         "classmap": [
