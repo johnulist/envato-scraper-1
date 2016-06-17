@@ -94,11 +94,15 @@
       , 'api_secret' => $this->api_secret
       , 'api_redirect' => $this->api_redirect
       , 'api_token' => $this->api_token
+      , 'api_refresh_token' => ( isset( $this->api_refresh_token ) ) ? $this->api_refresh_token : null
       ) );
 
       $file = $envato->request( 'v3/market/buyer/download', 'GET', array( 'item_id' => $id ) );
 
       if( $file->download_url ) {
+
+        if( $save AND function_exists( 'store_file') )
+          store_file( $id, $file->download_url );
 
         return $file;
 
@@ -115,18 +119,28 @@
     *** Fetch Screenshots
     **/
 
-    public function fetch_screenshots( $url, $save = false ) {
+    public function fetch_screenshots( $id, $save = false ) {
+
+      $envato = new \Smafe\Envato( array(
+        'api_id' => $this->api_id
+      , 'api_secret' => $this->api_secret
+      , 'api_redirect' => $this->api_redirect
+      , 'api_token' => $this->api_token
+      , 'api_refresh_token' => ( isset( $this->api_refresh_token ) ) ? $this->api_refresh_token : null
+      ) );
+
+      $request = $envato->request( 'v3/market/catalog/item', 'GET', array( 'id' => $id ) );
 
       // Multiple screenshots
-      if( $multiple = self::multiple_screenshots( $url ) )
+      if( $multiple = self::multiple_screenshots( $request->url ) )
         $gallery = $multiple;
 
       // Single screenshot
-      elseif( $single = self::single_screenshot( $url ) )
+      elseif( $single = self::single_screenshot( $request->url ) )
         $gallery = $single;
 
-      if( $save )
-        $this->store_screenshots( $url, $gallery );
+      if( $save AND function_exists( 'store_screenshots' ) )
+        store_screenshots( $id, $gallery );
 
       return $gallery;
 
@@ -144,6 +158,7 @@
       , 'api_secret' => $this->api_secret
       , 'api_redirect' => $this->api_redirect
       , 'api_token' => $this->api_token
+      , 'api_refresh_token' => ( isset( $this->api_refresh_token ) ) ? $this->api_refresh_token : null
       ) );
 
       $request = $envato->request( 'v3/market/catalog/item', 'GET', array( 'id' => $id ) );
@@ -167,13 +182,14 @@
       , 'api_secret' => $this->api_secret
       , 'api_redirect' => $this->api_redirect
       , 'api_token' => $this->api_token
+      , 'api_refresh_token' => ( isset( $this->api_refresh_token ) ) ? $this->api_refresh_token : null
       ) );
 
       $request = $envato->request( 'v3/market/catalog/item', 'GET', array( 'id' => $id ) );
 
       if( $request->previews->icon_preview->icon_url ) {
 
-        if( $save AND function_exists( store_thumbnail() ) )
+        if( $save AND function_exists( 'store_thumbnail' ) )
           store_thumbnail( $id, $request->previews->icon_preview->icon_url );
 
         return $request->previews->icon_preview->icon_url;
@@ -198,6 +214,7 @@
       , 'api_secret' => $this->api_secret
       , 'api_redirect' => $this->api_redirect
       , 'api_token' => $this->api_token
+      , 'api_refresh_token' => ( isset( $this->api_refresh_token ) ) ? $this->api_refresh_token : null
       ) );
 
       $request = $envato->request( 'v3/market/catalog/item', 'GET', array( 'id' => $id ) );

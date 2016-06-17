@@ -5,9 +5,11 @@
   **/
 
   include 'vendor/autoload.php';
+  include 'functions.php';
   include 'config.php';
 
   $url = 'http://themeforest.net/item/metrika-bootstrap-material-admin-dashboard/16329460?s_rank=1';
+  $id = '5458827';
 
   // Initiate scraper
   $scraper = new \Smafe\EnvatoScraper( array(
@@ -15,14 +17,16 @@
   , 'api_secret' => ENVATO_SECRET
   , 'api_redirect' => ENVATO_REDIRECT
   , 'api_token' => ENVATO_PERSONAL_TOKEN
-  , 'storage' => '/home/hello'
+  , 'files' => 'C:/Users/Freddy/Sites/envato-scrape/data/files/'
+  , 'screenshots' => 'C:/Users/Freddy/Sites/envato-scrape/data/screenshots/'
+  , 'thumbnails' => 'C:/Users/Freddy/Sites/envato-scrape/data/thumbnails/'
   ) );
 
 
   // Fetch screenshots
   try {
 
-    $screenshots = $scraper->fetch_screenshots( $url );
+    $screenshots = $scraper->fetch_screenshots( $id, true );
 
   } catch( \ErrorException $e ) {
 
@@ -34,7 +38,7 @@
   // Fetch meta
   try {
 
-    $meta = $scraper->fetch_meta( '16329460' );
+    $meta = $scraper->fetch_meta( $id );
 
   } catch( \ErrorException $e ) {
 
@@ -46,7 +50,7 @@
   // Fetch file
   try {
 
-    $file = $scraper->fetch_file( '16329460' );
+    $file = $scraper->fetch_file( $id, true );
 
   } catch( \ErrorException $e ) {
 
@@ -58,7 +62,7 @@
   // Fetch thumbnail
   try {
 
-    $thumbnail = $scraper->fetch_thumbnail( '16329460' );
+    $thumbnail = $scraper->fetch_thumbnail( $id, true );
 
   } catch( \ErrorException $e ) {
 
@@ -71,7 +75,7 @@
   try {
 
     $comments_start = microtime( true );
-    $comments = $scraper->fetch_comments( '16329460' );
+    $comments = $scraper->fetch_comments( $id );
     $comments_total = microtime( true ) - $comments_start;
 
   } catch( \ErrorException $e ) {
