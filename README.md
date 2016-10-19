@@ -17,4 +17,4 @@ Not yet available!
 
 ## Credits
 
-This Envato API library is written and maintained by [Smafe Web Solutions](https://www.smafe.com/). If you have any questions, concerns or suggestions, please dont hestiate to [contact us](https://www.smafe.com/#contact).
+This Envato marketplace scraper is written and maintained by [Smafe Web Solutions](https://www.smafe.com/). If you have any questions, concerns or suggestions, please dont hestiate to [contact us](https://www.smafe.com/#contact).
